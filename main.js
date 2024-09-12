@@ -1,7 +1,6 @@
 import { Cube } from "./Cube.js";
 import { Sphere } from "./Sphere.js";
 
-// Setup basic Three.js scene
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
@@ -19,28 +18,18 @@ scene.add(pointLight);
 let shapeActive = false;
 const shapes = [];
 
-// Load texture for the sphere
-const textureLoader = new THREE.TextureLoader();
-const earthTexture = textureLoader.load('earth.jpg');
-
-
-
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
     for (let shape of shapes) {
-        // Rotate the cube and sphere
-        shape.mesh.rotation.x += 0.01;
-        shape.mesh.rotation.y += 0.01;
+        shape.mesh.rotation.z += 0.01;
         shape.update();
     }
     renderer.render(scene, camera);
 }
 
-// Start the animation loop
 animate();
 
-// Handle keyboard input
 document.addEventListener('keydown', function(event) {
     switch(event.key) {
         case 'ArrowUp':
@@ -81,9 +70,6 @@ document.addEventListener('keydown', function(event) {
             const shape = shapes.at(-1);
             shape.explode();
             shape.particles.forEach(particle => scene.add(particle.mesh))
-            // scene.remove(shape);
-            // shape.geometry.dispose();
-            // shape.material.dispose();
             shapeActive = false;
             break;
     }
