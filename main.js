@@ -119,7 +119,6 @@ document.addEventListener('keydown', function(event) {
         case ' ':
             const shape = shapes.at(-1);
             shape.explode();
-            shape.particles.forEach(particle => scene.add(particle.mesh))
             shapeActive = false;
             break;
     }
